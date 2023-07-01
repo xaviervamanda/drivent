@@ -11,9 +11,6 @@ async function getAddressFromCEP(cep: string) {
   // FIXME: está com CEP fixo!
   const result = await checkCepAddress(cep);
 
-  if (!result.data) {
-    throw notFoundError();
-  }
 
   const adress: ViaCEPAddress = {
     logradouro: result.data.logradouro,
@@ -29,6 +26,10 @@ async function getAddressFromCEP(cep: string) {
 
 async function checkCepAddress (cep : string){
   const result = await request.get(`${process.env.VIA_CEP_API}/${cep}/json/`);
+
+  if (!result.data || result.data.erro) {
+    throw notFoundError();
+  }
 
   return result;
 }
@@ -61,11 +62,7 @@ async function createOrUpdateEnrollmentWithAddress(params: CreateOrUpdateEnrollm
   const address = getAddressForUpsert(params.address);
 
   // TODO - Verificar se o CEP é válido antes de associar ao enrollment.
-  const result = await checkCepAddress(address.cep);
-
-  if (!result.data) {
-    throw badRequestError();
-  }
+  await checkCepAddress(address.cep);
 
   const newEnrollment = await enrollmentRepository.upsert(params.userId, enrollment, exclude(enrollment, 'userId'));
 
