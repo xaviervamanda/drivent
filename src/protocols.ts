@@ -11,6 +11,18 @@ export type ViaCEPAddress = {
   uf: string;
 };
 
+export type ViaCEPAddressResponse = Omit<ViaCEPAddress, 'cidade'> & {
+  localidade: string;
+  ibge: string;
+  gia: string;
+  ddd: string;
+  siafi: string;
+}
+
+export type ViaCEPAddressError = {
+  erro: boolean;
+}
+
 export type RequestError = {
   status: number;
   data: object | null;
