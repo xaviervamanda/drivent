@@ -1,3 +1,5 @@
+import { type } from "os";
+
 export type ApplicationError = {
   name: string;
   message: string;
@@ -44,3 +46,14 @@ export type RequestError = {
   name: string;
   message: string;
 };
+
+export type PaymentRequestBody = {
+  ticketId: number;
+  cardData: {
+    issuer: string;
+    number: number;
+    name: string;
+    expirationDate: Date;
+    cvv: number;
+  }
+}

@@ -2,7 +2,6 @@ import httpStatus from "http-status";
 import * as ticketsService from "@/services/tickets-service";
 import { Request, Response } from "express";
 import { AuthenticatedRequest } from "@/middlewares";
-import { badRequestError } from "@/errors";
 
 export async function getAllTypesOfTickets(req: AuthenticatedRequest, res: Response) {
     try{
@@ -22,6 +21,7 @@ export async function getUserTickets (req: AuthenticatedRequest, res: Response){
         if (!ticket){
             return res.sendStatus(httpStatus.NOT_FOUND);
         }
+        
         return res.status(httpStatus.OK).send(ticket);
         
     } catch (error){

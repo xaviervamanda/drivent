@@ -11,40 +11,42 @@ type TicketResponse =  Ticket & {
     ticketType: TicketType
 }
 
-export async function getUserTickets (userId: number): Promise<TicketResponse[]> {
+export async function getUserTickets(userId: number): Promise<TicketResponse[]> {
     return await prisma.$queryRaw(
-        Prisma.sql`
-        SELECT
+      Prisma.sql`
+      SELECT
         "Ticket".id,
         "Ticket".status,
         "Ticket"."ticketTypeId",
         "Ticket"."enrollmentId",
         json_build_object(
-            'id', "TicketType".id,
-            'name', "TicketType".name,
-            'price', "TicketType".price,
-            'isRemote', "TicketType"."isRemote",
-            'includesHotel', "TicketType"."includesHotel",
-            'createdAt', "TicketType"."createdAt",
-            'updatedAt', "TicketType"."updatedAt"
+          'id', "TicketType".id,
+          'name', "TicketType".name,
+          'price', "TicketType".price,
+          'isRemote', "TicketType"."isRemote",
+          'includesHotel', "TicketType"."includesHotel",
+          'createdAt', to_char("TicketType"."createdAt", 'YYYY-MM-DD"T"HH24:MI:SS.MSZ'),
+          'updatedAt', to_char("TicketType"."updatedAt", 'YYYY-MM-DD"T"HH24:MI:SS.MSZ')
         ) AS "TicketType",
-        "Ticket"."createdAt",
-        "Ticket"."updatedAt"
-        FROM
+        to_char("Ticket"."createdAt", 'YYYY-MM-DD"T"HH24:MI:SS.MSZ') AS "createdAt",
+        to_char("Ticket"."updatedAt", 'YYYY-MM-DD"T"HH24:MI:SS.MSZ') AS "updatedAt"
+      FROM
         "Enrollment"
         JOIN
-        "Ticket" ON "Enrollment".id = "Ticket"."enrollmentId"
+          "Ticket" ON "Enrollment".id = "Ticket"."enrollmentId"
         JOIN
-        "TicketType" ON "Ticket"."ticketTypeId" = "TicketType".id
-        WHERE "Enrollment"."userId" = ${userId};
-        `
-    )
+          "TicketType" ON "Ticket"."ticketTypeId" = "TicketType".id
+      WHERE
+        "Enrollment"."userId" = ${userId};
+      `
+    );
 }
+  
 
-export async function getUserEnrollment (userId: number){
-    return await prisma.enrollment.findUnique({
+export async function getUserTicketsByTicketId (ticketId: number){
+    return await prisma.ticket.findUnique({
         where: {
-            userId
+            id: ticketId
         }
     })
 }
