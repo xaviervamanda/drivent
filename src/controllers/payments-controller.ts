@@ -12,7 +12,8 @@ export async function getUserTicketPayment(req: AuthenticatedRequest, res: Respo
         if (!ticketId){
             return res.sendStatus(httpStatus.BAD_REQUEST);
         }
-        return await paymentsService.getUserTicketPayment(parseInt(ticketId), userId);
+        const ticket = await paymentsService.getUserTicketPayment(parseInt(ticketId), userId);
+        return res.status(httpStatus.OK).send(ticket);
         
     } catch (error){
         if (error.name === "NotFoundError"){
@@ -31,7 +32,8 @@ export async function createTicketPayment (req: AuthenticatedRequest, res: Respo
     const {userId} = req;
 
     try{
-        return await paymentsService.createTicketPayment(body, userId);
+        const ticket = await paymentsService.createTicketPayment(body, userId);
+        return res.status(httpStatus.OK).send(ticket);
         
     } catch (error){
         if (error.name === "NotFoundError"){

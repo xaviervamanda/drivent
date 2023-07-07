@@ -7,9 +7,9 @@ export async function getUserTicketPayment (ticketId: number, userId: number) {
 
     const ticketByTicketId = await ticketsRepository.getUserTicketsByTicketId(ticketId);
     const ticketByUserId = await ticketsRepository.getUserTickets(userId);
-    // if (ticketByUserId[0].id !== ticketByTicketId.id) {
-    //     throw unauthorizedError();
-    // }
+    if (ticketByUserId[0].id !== ticketByTicketId.id) {
+        throw unauthorizedError();
+    }
     const payment = await paymentsRepository.getUserTicketPayment(ticketId);
     if (!payment) {
         throw notFoundError();
@@ -25,9 +25,9 @@ export async function createTicketPayment (body: PaymentRequestBody, userId: num
     }
     const ticket = await ticketsRepository.getUserTickets(userId);
 
-    // if (ticket[0].id !== ticketByTicketId.id) {
-    //     throw unauthorizedError();
-    // }
+    if (ticket[0].id !== ticketByTicketId.id) {
+        throw unauthorizedError();
+    }
 
     await ticketsRepository.updateTicketStatus(body.ticketId);
 
