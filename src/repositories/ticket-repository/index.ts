@@ -79,3 +79,11 @@ export async function getUserTicketPayment (ticketId: number){
         }
     })
 }
+
+export async function getTicketByType (id: number){
+    return await prisma.ticketType.findUnique({
+        where: {
+            id
+        }
+    })
+}

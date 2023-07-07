@@ -36,17 +36,18 @@ export async function createTicketPayment (body: PaymentRequestBody, userId: num
     if (enrollment.userId !== userId) {
         throw unauthorizedError();
     }
-    const ticket = await ticketsRepository.getUserTickets(userId);
+    const ticketType = await ticketsRepository.getTicketByType(ticketByTicketId.ticketTypeId);
 
     await ticketsRepository.updateTicketStatus(body.ticketId);
+    
 
     const data = {
         ticketId: body.ticketId,
-        value: ticket[0].ticketType.price,
         cardIssuer: body.cardData.issuer,
+        value: ticketType.price,
         cardLastDigits: body.cardData.number.toString().slice(-4)
     }
-    
+
     await paymentsRepository.createTicketPayment(data);
     const payment = await paymentsRepository.getUserTicketPayment(body.ticketId);
     return payment[0];
