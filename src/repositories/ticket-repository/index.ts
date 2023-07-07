@@ -44,7 +44,7 @@ export async function getUserTickets(userId: number): Promise<TicketResponse[]> 
   
 
 export async function getUserTicketsByTicketId (ticketId: number){
-    return await prisma.ticket.findUnique({
+    return await prisma.ticket.findFirst({
         where: {
             id: ticketId
         }
@@ -58,5 +58,16 @@ export async function createTicket (ticketTypeId: number, enrollmentId: number){
             status: "RESERVED",
             enrollmentId: enrollmentId
         }
+    })
+}
+
+export async function updateTicketStatus (ticketId: number){
+    return await prisma.ticket.update({
+        where: {
+            id: ticketId
+        },
+        data: {
+            status: "PAID"
+        },
     })
 }
