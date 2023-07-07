@@ -4,6 +4,7 @@ import { Ticket, TicketType } from "@prisma/client";
 
 export async function getAllTypesOfTickets (){
     return await prisma.ticketType.findMany();
+    
 }
 
 type TicketResponse =  Ticket & {
@@ -14,10 +15,10 @@ export async function getUserTickets (userId: number): Promise<TicketResponse[]>
     return await prisma.$queryRaw(
         Prisma.sql`
         SELECT
-        "Tickets".id,
-        "Tickets".status,
-        "Tickets"."ticketTypeId",
-        "Tickets"."enrollmentId",
+        "Ticket".id,
+        "Ticket".status,
+        "Ticket"."ticketTypeId",
+        "Ticket"."enrollmentId",
         json_build_object(
             'id', "TicketType".id,
             'name', "TicketType".name,
@@ -27,15 +28,15 @@ export async function getUserTickets (userId: number): Promise<TicketResponse[]>
             'createdAt', "TicketType"."createdAt",
             'updatedAt', "TicketType"."updatedAt"
         ) AS "TicketType",
-        "Tickets"."createdAt",
-        "Tickets"."updatedAt"
+        "Ticket"."createdAt",
+        "Ticket"."updatedAt"
         FROM
         "Enrollment"
         JOIN
-        tickets ON "Enrollment".id = "Tickets"."enrollmentId"
+        "Ticket" ON "Enrollment".id = "Ticket"."enrollmentId"
         JOIN
-        "TicketType" ON "Tickets"."ticketTypeId" = "TicketType".id;
-        WHERE "Enrollment".userId = ${userId};
+        "TicketType" ON "Ticket"."ticketTypeId" = "TicketType".id
+        WHERE "Enrollment"."userId" = ${userId};
         `
     )
 }
@@ -53,8 +54,7 @@ export async function createTicket (ticketTypeId: number, enrollmentId: number){
         data: {
             ticketTypeId: ticketTypeId,
             status: "RESERVED",
-            enrollmentId: enrollmentId,
-            updatedAt: new Date()
+            enrollmentId: enrollmentId
         }
     })
 }

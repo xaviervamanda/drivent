@@ -19,9 +19,15 @@ export async function getUserTickets (req: AuthenticatedRequest, res: Response){
 
     try{
         const ticket = await ticketsService.getUserTickets(userId);
+        if (!ticket){
+            return res.sendStatus(httpStatus.NOT_FOUND);
+        }
         return res.status(httpStatus.OK).send(ticket);
         
     } catch (error){
+        if (error.name === "NotFoundError"){
+            return res.status(httpStatus.NOT_FOUND).send(error.message);
+        }
         console.log(error);
         return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -38,6 +44,9 @@ export async function createTicket (req: AuthenticatedRequest, res: Response){
     } catch (error){
         if (error.name === "BadRequestError"){
             return res.status(httpStatus.BAD_REQUEST).send(error.message);
+        }
+        if (error.name === "NotFoundError"){
+            return res.status(httpStatus.NOT_FOUND).send(error.message);
         }
         console.log(error);
         return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
