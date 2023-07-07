@@ -32,5 +32,13 @@ export async function getUserEnrollment (userId: number){
   })
 }
 
+export async function getUserEnrollmentById (id: number){
+  return await prisma.enrollment.findUnique({
+      where: {
+          id
+      }
+  })
+}
+
 export type CreateEnrollmentParams = Omit<Enrollment, 'id' | 'createdAt' | 'updatedAt'>;
 export type UpdateEnrollmentParams = Omit<CreateEnrollmentParams, 'userId'>;
