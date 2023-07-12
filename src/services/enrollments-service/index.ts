@@ -2,8 +2,7 @@ import { Address, Enrollment } from '@prisma/client';
 import { request } from '@/utils/request';
 import { badRequestError, invalidDataError, notFoundError } from '@/errors';
 import addressRepository, { CreateAddressParams } from '@/repositories/address-repository';
-import { CreateEnrollmentParams } from '@/repositories/enrollment-repository';
-import * as enrollmentRepository from '@/repositories/enrollment-repository';
+import enrollmentRepository, { CreateEnrollmentParams } from '@/repositories/enrollment-repository';
 import { exclude } from '@/utils/prisma-utils';
 import { AddressEnrollment} from '@/protocols';
 
