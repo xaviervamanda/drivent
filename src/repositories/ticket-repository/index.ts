@@ -51,6 +51,14 @@ export async function getUserTicketsByTicketId (ticketId: number){
     })
 }
 
+export async function getUserTicketsByEnrollmentId (enrollmentId: number){
+  return await prisma.ticket.findFirst({
+      where: {
+          enrollmentId
+      }
+  })
+}
+
 export async function createTicket (ticketTypeId: number, enrollmentId: number){
     return await prisma.ticket.create({
         data: {
