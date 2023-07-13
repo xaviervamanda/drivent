@@ -24,6 +24,7 @@ export async function getHotelById(hotelId: number, userId: number){
     if (!enrollment) throw notFoundError();
     const ticket = await getUserTicketsByEnrollmentId(enrollment.id);
     if (!ticket) throw notFoundError();
+
     const ticketType = await getTicketByType(ticket.ticketTypeId);
 
     if (ticket.status === "RESERVED" 
@@ -31,6 +32,7 @@ export async function getHotelById(hotelId: number, userId: number){
         || ticketType.includesHotel === false) throw paymentRquiredError();
 
     const hotel = await hotelsRepository.getHotelById(hotelId);
+    console.log(hotel);
     if (!hotel) throw notFoundError();
     return hotel;
 }

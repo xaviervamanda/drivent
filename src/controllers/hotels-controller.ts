@@ -23,11 +23,15 @@ export async function getHotels (req: AuthenticatedRequest, res: Response){
 }
 
 export async function getHotelById (req: AuthenticatedRequest, res: Response){
-    const {hotelId} = req.params as {hotelId: string};
+    const {hotelId} = req.params;
     const {userId} = req;
 
+    if (!hotelId) return res.sendStatus(httpStatus.BAD_REQUEST);
+    const hotelIdNumber = Number(hotelId);
+    if (isNaN(hotelIdNumber)) return res.sendStatus(httpStatus.BAD_REQUEST);
+
     try{
-        const hotel = await hotelsService.getHotelById(Number(hotelId), userId);
+        const hotel = await hotelsService.getHotelById(hotelIdNumber, userId);
         return res.status(httpStatus.OK).send(hotel);
 
     }catch (error){
