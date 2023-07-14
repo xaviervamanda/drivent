@@ -209,7 +209,7 @@ describe("GET /hotels/:hotelId", () => {
             const token = await generateValidToken(user);
             const enrollment = await createEnrollmentWithAddress(user);
             const ticketType = await createTicketType();
-            await createTicket(enrollment.id, ticketType.id, TicketStatus.RESERVED);
+            await createTicket(enrollment.id, ticketType.id, TicketStatus.PAID);
             const hotelId = faker.datatype.number({min: 1000000});
 
         
