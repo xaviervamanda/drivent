@@ -7,8 +7,8 @@ beforeEach(async () => {
     jest.clearAllMocks();
 });
 
-describe("POST /booking", () => {
-    it ("should respond with status 403 when given ticket is remote", async () => {
+describe("create booking", () => {
+    it ("should throw an error when given ticket is remote", async () => {
         
     })
 })

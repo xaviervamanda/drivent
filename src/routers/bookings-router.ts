@@ -6,6 +6,6 @@ import * as bookingsController from "@/controllers/bookings-controller";
 export const bookingsRouter = Router();
 
 bookingsRouter.use (authenticateToken);
-bookingsRouter.get ('/', );
+bookingsRouter.get ('/', bookingsController.getBooking);
 bookingsRouter.post ('/', bookingsController.createBooking);
 bookingsRouter.put ('/:bookingId', bookingsController.updateBooking);

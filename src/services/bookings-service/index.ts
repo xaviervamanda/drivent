@@ -26,6 +26,12 @@ export async function updateBooking (bookingId: number, roomId: number, userId: 
     if (!room) throw notFoundError();
 
     if (room.Booking.length === room.capacity) throw forbiddenError();
-    
+
     return await bookingsRepository.updateBooking(bookingId, roomId);
+}
+
+export async function getBooking (userId: number){
+    const booking = await bookingsRepository.getBookingWithRoomData (userId);
+    if (!booking) throw notFoundError();
+    return booking;
 }
