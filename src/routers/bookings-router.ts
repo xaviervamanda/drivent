@@ -7,5 +7,5 @@ export const bookingsRouter = Router();
 
 bookingsRouter.use (authenticateToken);
 bookingsRouter.get ('/', );
-bookingsRouter.post ('/', );
-bookingsRouter.put ('/:bookingId', );
+bookingsRouter.post ('/', bookingsController.createBooking);
+bookingsRouter.put ('/:bookingId', bookingsController.updateBooking);
