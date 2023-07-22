@@ -8,8 +8,8 @@ export async function createBooking(req: AuthenticatedRequest, res: Response) {
     const roomId = Number(roomIdString);
     const {userId} = req;
     
-    if (!roomIdString) return res.sendStatus(httpStatus.BAD_REQUEST);
-    if (isNaN(roomId)) return res.sendStatus(httpStatus.BAD_REQUEST);
+    // if (!roomIdString) return res.sendStatus(httpStatus.BAD_REQUEST);
+    // if (isNaN(roomId)) return res.sendStatus(httpStatus.BAD_REQUEST);
 
     try{
         const booking = await bookingsService.createBooking(userId, roomId);
@@ -36,8 +36,8 @@ export async function updateBooking (req: AuthenticatedRequest, res: Response) {
     const roomId = Number(roomIdString);
     const {userId} = req;
     
-    if (!roomIdString) return res.sendStatus(httpStatus.BAD_REQUEST);
-    if (isNaN(roomId)) return res.sendStatus(httpStatus.BAD_REQUEST);
+    // if (!roomIdString) return res.sendStatus(httpStatus.BAD_REQUEST);
+    // if (isNaN(roomId)) return res.sendStatus(httpStatus.BAD_REQUEST);
 
     try{
         const booking = await bookingsService.updateBooking(bookingId, roomId, userId);
