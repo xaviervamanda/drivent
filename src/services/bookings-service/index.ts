@@ -17,3 +17,15 @@ export async function createBooking(userId: number, roomId: number) {
     
     return await bookingsRepository.createBooking(userId, roomId);
 }
+
+export async function updateBooking (bookingId: number, roomId: number, userId: number){
+    const booking = await bookingsRepository.getBookingWithRoomData (userId);
+    if (!booking) throw forbiddenError();
+
+    const room = await bookingsRepository.getRoomAndItsBookings(roomId);
+    if (!room) throw notFoundError();
+
+    if (room.Booking.length === room.capacity) throw forbiddenError();
+    
+    return await bookingsRepository.updateBooking(bookingId, roomId);
+}
