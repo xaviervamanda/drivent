@@ -1,6 +1,5 @@
 import { prisma } from "@/config";
 import { Hotel, Room } from "@prisma/client";
-import { Prisma } from "@prisma/client";
 
 export function getHotels (){
     return prisma.hotel.findMany();
