@@ -8,12 +8,12 @@ export async function createBooking(req: AuthenticatedRequest, res: Response) {
     const roomId = Number(roomIdString);
     const {userId} = req;
     
-    // if (!roomIdString) return res.sendStatus(httpStatus.BAD_REQUEST);
-    // if (isNaN(roomId)) return res.sendStatus(httpStatus.BAD_REQUEST);
+    if (!roomIdString) return res.sendStatus(httpStatus.BAD_REQUEST);
+    if (isNaN(roomId)) return res.sendStatus(httpStatus.BAD_REQUEST);
 
     try{
         const booking = await bookingsService.createBooking(userId, roomId);
-        return res.status(httpStatus.OK).send(booking.id);
+        return res.status(httpStatus.OK).send({bookingId: booking.id});
 
     } catch (error){
         if (error.name === "BadRequestError"){
@@ -36,12 +36,12 @@ export async function updateBooking (req: AuthenticatedRequest, res: Response) {
     const roomId = Number(roomIdString);
     const {userId} = req;
     
-    // if (!roomIdString) return res.sendStatus(httpStatus.BAD_REQUEST);
-    // if (isNaN(roomId)) return res.sendStatus(httpStatus.BAD_REQUEST);
+    if (!roomIdString) return res.sendStatus(httpStatus.BAD_REQUEST);
+    if (isNaN(roomId)) return res.sendStatus(httpStatus.BAD_REQUEST);
 
     try{
         const booking = await bookingsService.updateBooking(bookingId, roomId, userId);
-        return res.status(httpStatus.OK).send(booking.id);
+        return res.status(httpStatus.OK).send({bookingId: booking.id});
 
     } catch (error){
         if (error.name === "BadRequestError"){
