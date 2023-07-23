@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">28.57% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>21/21</span>
+                <span class='fraction'>6/21</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>0/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">33.33% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>18/18</span>
+                <span class='fraction'>6/18</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -88,56 +88,56 @@
 <a name='L23'></a><a href='#L23'>23</a>
 <a name='L24'></a><a href='#L24'>24</a>
 <a name='L25'></a><a href='#L25'>25</a>
-<a name='L26'></a><a href='#L26'>26</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<a name='L26'></a><a href='#L26'>26</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { badRequestError, notFoundError } from '@/errors';
 import * as ticketsRepository from '@/repositories/ticket-repository';
 import * as enrollmentRepository from '@/repositories/enrollment-repository';
 &nbsp;
-export async function getAllTypesOfTickets () {
-    const tickets = await ticketsRepository.getAllTypesOfTickets();
-    if (tickets.length === 0){
-        return [];
+export async function <span class="fstat-no" title="function not covered" >getAllTypesOfTickets </span>() {
+    const tickets = <span class="cstat-no" title="statement not covered" >await ticketsRepository.getAllTypesOfTickets();</span>
+<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (tickets.length === 0){</span>
+<span class="cstat-no" title="statement not covered" >        return [];</span>
     }
-    return tickets;
+<span class="cstat-no" title="statement not covered" >    return tickets;</span>
 }
 &nbsp;
-export async function getUserTickets (userId: number) {
-    const enrollment = await enrollmentRepository.getUserEnrollment(userId);
-    if(!enrollment) throw notFoundError();
+export async function <span class="fstat-no" title="function not covered" >getUserTickets </span>(userId: number) {
+    const enrollment = <span class="cstat-no" title="statement not covered" >await enrollmentRepository.getUserEnrollment(userId);</span>
+<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if(!enrollment) <span class="cstat-no" title="statement not covered" >throw notFoundError();</span></span>
     
-    const tickets = await ticketsRepository.getUserTickets(userId);
-    return tickets[0];
+    const tickets = <span class="cstat-no" title="statement not covered" >await ticketsRepository.getUserTickets(userId);</span>
+<span class="cstat-no" title="statement not covered" >    return tickets[0];</span>
 }
 &nbsp;
-export async function createTicket (ticketTypeId: number, userId: number) {
-    if (!ticketTypeId) throw badRequestError()
-    const enrollment = await enrollmentRepository.getUserEnrollment(userId);
-    if (!enrollment) throw notFoundError();
-    return await ticketsRepository.createTicket(ticketTypeId, enrollment.id);
+export async function <span class="fstat-no" title="function not covered" >createTicket </span>(ticketTypeId: number, userId: number) {
+<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (!ticketTypeId) <span class="cstat-no" title="statement not covered" >throw badRequestError()</span></span>
+    const enrollment = <span class="cstat-no" title="statement not covered" >await enrollmentRepository.getUserEnrollment(userId);</span>
+<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (!enrollment) <span class="cstat-no" title="statement not covered" >throw notFoundError();</span></span>
+<span class="cstat-no" title="statement not covered" >    return await ticketsRepository.createTicket(ticketTypeId, enrollment.id);</span>
 }</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -145,7 +145,7 @@ export async function createTicket (ticketTypeId: number, userId: number) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-07-22T22:14:59.589Z
+                at 2023-07-23T01:43:00.303Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

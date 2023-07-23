@@ -1,5 +1,5 @@
 import httpStatus from "http-status";
-import * as bookingsService from "@/services/bookings-service";
+import * as bookingsService from "@/services/booking-service";
 import { AuthenticatedRequest } from "@/middlewares";
 import { Response } from "express";
 
