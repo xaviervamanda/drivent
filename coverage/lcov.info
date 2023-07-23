@@ -556,9 +556,9 @@ SF:src/errors/not-found-error.ts
 FN:3,notFoundError
 FNF:1
 FNH:1
-FNDA:2,notFoundError
+FNDA:3,notFoundError
 DA:3,2
-DA:4,2
+DA:4,3
 LF:2
 LH:2
 BRF:0
@@ -1224,7 +1224,7 @@ FNF:3
 FNH:3
 FNDA:6,createBooking
 FNDA:4,updateBooking
-FNDA:1,getBooking
+FNDA:2,getBooking
 DA:1,2
 DA:2,2
 DA:3,2
@@ -1245,8 +1245,8 @@ DA:26,3
 DA:28,2
 DA:30,1
 DA:33,2
-DA:34,1
-DA:35,1
+DA:34,2
+DA:35,2
 DA:36,1
 LF:23
 LH:23
@@ -1259,9 +1259,9 @@ BRDA:16,3,0,1
 BRDA:23,4,0,1
 BRDA:26,5,0,1
 BRDA:28,6,0,1
-BRDA:35,7,0,0
+BRDA:35,7,0,1
 BRF:10
-BRH:9
+BRH:10
 end_of_record
 TN:
 SF:src/services/enrollments-service/index.ts

@@ -119,3 +119,16 @@ describe("update booking", () => {
         })
     })
 })
+
+describe("get booking", () => {
+    it ("should throw an error when user doesn't have booking", async () => {
+        const userId = 1;
+        jest.spyOn(bookingsRepository, "getBookingWithRoomData").mockResolvedValue(undefined);
+        const promise = bookingsService.getBooking(userId);
+
+        expect(promise).rejects.toEqual({
+            name: 'NotFoundError',
+            message: 'No result for this search!',
+        })
+    })
+})
