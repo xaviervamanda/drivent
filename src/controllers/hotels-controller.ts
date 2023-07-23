@@ -6,20 +6,8 @@ import * as hotelsService from "@/services/hotels-service";
 export async function getHotels (req: AuthenticatedRequest, res: Response){
     const {userId} = req;
 
-    try{
-        const hotels = await hotelsService.getHotels(userId);
-        return res.status(httpStatus.OK).send(hotels);
-
-    }catch (error){
-        if (error.name === "NotFoundError"){
-            return res.status(httpStatus.NOT_FOUND).send(error.message);
-        }
-        if (error.name === "PaymentRequiredError"){
-            return res.sendStatus(httpStatus.PAYMENT_REQUIRED);
-        }
-        console.log(error);
-        return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
-    }
+    const hotels = await hotelsService.getHotels(userId);
+    return res.status(httpStatus.OK).send(hotels);
 }
 
 export async function getHotelById (req: AuthenticatedRequest, res: Response){
@@ -30,18 +18,6 @@ export async function getHotelById (req: AuthenticatedRequest, res: Response){
     const hotelIdNumber = Number(hotelId);
     if (isNaN(hotelIdNumber)) return res.sendStatus(httpStatus.BAD_REQUEST);
 
-    try{
-        const hotel = await hotelsService.getHotelById(hotelIdNumber, userId);
-        return res.status(httpStatus.OK).send(hotel);
-
-    }catch (error){
-        if (error.name === "NotFoundError"){
-            return res.status(httpStatus.NOT_FOUND).send(error.message);
-        }
-        if (error.name === "PaymentRequiredError"){
-            return res.sendStatus(httpStatus.PAYMENT_REQUIRED);
-        }
-        console.log(error);
-        return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
-    }
+    const hotel = await hotelsService.getHotelById(hotelIdNumber, userId);
+    return res.status(httpStatus.OK).send(hotel);
 }
